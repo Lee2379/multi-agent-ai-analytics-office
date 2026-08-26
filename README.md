@@ -2,11 +2,6 @@
 
 **Language:** English | [日本語](japanese-readme.md)
 
-[![CI](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-reproducible%20demo-2496ED?logo=docker&logoColor=white)
-![Privacy](https://img.shields.io/badge/evidence-privacy--sanitized-176B3A)
-
 **A role-based AI office for research, governed data operations, analytics, review, and executive delivery—combining Hermes and Slack with Supabase/PostgreSQL and Obsidian/OhMyWiki inside a Dockerized operating model.**
 
 This portfolio case study separates two things that are often mixed together:

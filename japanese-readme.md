@@ -2,11 +2,6 @@
 
 **言語:** [English](README.md) | 日本語
 
-[![CI](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-reproducible%20demo-2496ED?logo=docker&logoColor=white)
-![Privacy](https://img.shields.io/badge/evidence-privacy--sanitized-176B3A)
-
 **Docker上の運用モデルにおいて、Hermes／SlackとSupabase／PostgreSQL、Obsidian／OhMyWikiを組み合わせ、調査、統制されたデータ運用、分析、レビュー、経営向け成果物の作成を役割別AIエージェントで実行する分析オフィスです。**
 
 本リポジトリでは、混同されやすい二つの検証対象を明確に分離しています。
