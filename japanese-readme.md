@@ -211,10 +211,6 @@ workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed kn
 
 #### 2. Reconciliationと監査可能なSQL
 
-<p align="center"><a href="assets/evidence/32-supabase-load-reconciliation-sanitized.png"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="5 tableのSupabase load reconciliation" width="100%" /></a></p>
-
-**Load verification.** 5つのstaging tableについて、54,690行・113 batchの件数がすべて一致しました。曖昧なduplicate candidateは自動削除せず、人間へescalateします。
-
 <p align="center"><a href="assets/evidence/34-agent-sql-analysis.png"><img src="assets/evidence/34-agent-sql-analysis.png" alt="実行SQLを保持したAdaのSQL分析" width="100%" /></a></p>
 
 **Auditable analysis.** channel別指標と、その計算に使用したSQLを同時に返します。

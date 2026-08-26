@@ -33,7 +33,6 @@ These files are privacy-reviewed captures prepared for the public portfolio. The
 | `29-postgres-schema-contract.png` | PostgreSQL snapshot-table contract | metadata normalized; visible DDL and constraints retained |
 | `30-supabase-schema-sanitized.png` | Deployed Supabase schema | browser URL and account/project identifiers removed by cropping |
 | `31-supabase-loaded-records-sanitized.png` | Materialized product snapshots | organization/project labels covered with opaque white masks; public source URLs retained |
-| `32-supabase-load-reconciliation-sanitized.png` | Five-table load reconciliation | personal paths and internal run identifier covered with opaque white masks |
 | `33-data-quality-human-review.png` | Data-quality findings and human decision points | metadata normalized; no credential or private identifier observed |
 | `34-agent-sql-analysis.png` | Auditable channel-performance SQL | metadata normalized; query and aggregate output retained |
 | `35-deployed-bi-dashboard.png` | Deployed collaborative BI artifact | metadata normalized; public deployment and dashboard output retained |
