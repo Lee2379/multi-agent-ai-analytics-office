@@ -75,10 +75,6 @@ The ingestion operating model assigns collection to Oliver, CSV contract validat
 
 The table capture shows records materialized in Supabase with run identifiers, source-specific product IDs, retained source URLs, product names, and brand fields. Public commerce URLs remain visible as provenance; private Supabase organization and project labels are covered with opaque white masks.
 
-![Sanitized reconciliation report comparing five CSV staging inputs with Supabase counts](../../assets/evidence/32-supabase-load-reconciliation-sanitized.png)
-
-The captured reconciliation checks five staging tables against direct Supabase queries. All five source/database row counts match, covering **54,690 rows** across **113 batches**. The loader is described as transactional and stops rather than appending duplicates when a target batch already exists. Personal paths and the internal run identifier are covered by opaque white masks.
-
 ## 3. Data quality with human decision points
 
 ![Data-quality report separating deterministic checks from decisions requiring human review](../../assets/evidence/33-data-quality-human-review.png)

@@ -177,12 +177,6 @@
       "treatment": "Supabase organization and project labels covered with opaque white masks; public product-source URLs and table records retained."
     },
     {
-      "path": "assets/evidence/32-supabase-load-reconciliation-sanitized.png",
-      "bytes": 161412,
-      "sha256": "7a0843ddb9b50df4461ffbdf0c0c5af6a7536ad66fb09fed8422c93b5689ad16",
-      "treatment": "Personal filesystem paths and internal run identifier covered with opaque white masks; reconciliation counts retained."
-    },
-    {
       "path": "assets/evidence/33-data-quality-human-review.png",
       "bytes": 251940,
       "sha256": "b1362a6a70781b27ebfbc29a16a9e62e25346069be58463888eea0bacccd1091",

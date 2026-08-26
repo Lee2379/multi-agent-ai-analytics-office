@@ -211,10 +211,6 @@ This case extends the office into a governed database workflow. Oliver collects 
 
 #### 2. Reconciliation and auditable SQL
 
-<p align="center"><a href="assets/evidence/32-supabase-load-reconciliation-sanitized.png"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="Sanitized five-table Supabase load reconciliation" width="100%" /></a></p>
-
-**Load verification.** Five staging tables reconcile exactly across 54,690 rows and 113 batches; ambiguous duplicates are escalated rather than deleted automatically.
-
 <p align="center"><a href="assets/evidence/34-agent-sql-analysis.png"><img src="assets/evidence/34-agent-sql-analysis.png" alt="Ada SQL analysis with the executed query preserved" width="100%" /></a></p>
 
 **Auditable analysis.** The agent returns channel metrics together with the SQL used to calculate them.
