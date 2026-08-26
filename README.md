@@ -1,6 +1,6 @@
 # Multi-Agent AI Analytics Office
 
-**Language:** English | [日本語](README.ja.md)
+**Language:** English | [日本語](japanese-readme.md)
 
 [![CI](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
