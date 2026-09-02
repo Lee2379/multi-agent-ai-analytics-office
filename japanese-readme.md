@@ -2,42 +2,15 @@
 
 **言語:** [English](README.md) | 日本語
 
-**Docker上の運用モデルにおいて、Hermes／SlackとSupabase／PostgreSQL、Obsidian／OhMyWikiを組み合わせ、調査、統制されたデータ運用、分析、レビュー、経営向け成果物の作成を役割別AIエージェントで実行する分析オフィスです。**
+## プロジェクト概要
 
-本リポジトリでは、混同されやすい二つの検証対象を明確に分離しています。
+- **解決した課題:** 調査、データ処理、解釈、文章化、承認を一つのモデル会話で行うと、誤りが入った工程と最終結果の根拠を追跡しにくくなります。
+- **実装したもの:** 役割を分けた7つのHermesプロファイル、Slackルーティング、Dockerのリソース制限、成果物による引き渡し、合成データで公開ワークフローを実行する外部依存のないPythonハーネスを構築しました。
+- **結果:** 参照実行は7工程を完了し、リポジトリに保存した6成果物を再生成して12件のテストを通過します。公開画像では認証情報や非公開メッセージを出さず、Slack、Supabase、Obsidianを使った役割別ワークフローを確認できます。
+- **担当範囲:** エージェントの役割仕様、プロファイルの配置・設定、ワークフロー接続、公開評価ハーネス、公開時のプライバシー対策を担当しました。
+- **確認方法:** [サンプルの経営向けレポート](artifacts/sample_run/executive_report.md)を読むか、`agentic-office run --products data/sample_products.csv --sales data/sample_sales.csv --output artifacts/local_run`を実行できます。
 
-1. **運用証跡:** 一つの制約付きDocker環境で稼働し、Slack経由で実務タスクを処理する7つのHermes専門プロファイル。
-2. **再現可能な評価:** 同一の役割境界を合成データ上で実行し、監査可能なtraceを生成してCIで継続的に検証する、外部依存のない決定論的Pythonハーネス。
-
-認証情報、非公開メッセージ、メール／カレンダーデータ、Workspace識別子、個人のファイルパスは公開していません。掲載画像はprivacy-sanitized derivative、または変更不要と判断したlow-sensitivity captureです。private originalはリポジトリ外で管理しています。
-
-## エグゼクティブサマリー
-
-本プロトタイプは、汎用LLMランタイムを小規模な仮想分析組織へ再構成したものです。データエンジニアリング、定量分析、ビジネス解釈、可視化、ナラティブ作成、品質保証、最終統合の責任を各エージェントに割り当てています。各段階は自由形式のグループチャットではなく、名前付きartifactとtrace eventを出力します。
-
-運用環境では、以下を確認しました。
-
-- gatewayが稼働する7つの分離プロファイル
-- 2 CPU・4 GiBメモリのDockerリソース制限
-- 非特権`hermes`ユーザーでの実行
-- 公開情報を用いた市場調査結果のSlack配信
-- 調査、分析、プレゼンテーション作成、運用支援を含む役割別タスク
-- source provenance、concept／relation構造、英語・日本語fact-check、source-linked 15ページ報告書を持つObsidianベースの市場調査workflow
-- schema control、役割分離されたingestion、reconciliation、人間によるdata-quality判断、監査可能なSQL分析、定期orchestration、deploy済みBI dashboardを統合したSupabaseベースのdata-operations loop
-
-公開リポジトリには、厳格なデータ検証、時間リークを防ぐholdout予測、artifact contract、QA gate、プライバシースキャン、テスト、オフラインで再現できるhardened containerを実装しています。
-
-### 検証状況
-
-| Control | Committed status |
-|---|---:|
-| Unit／integration tests | 12 / 12 passed |
-| 決定論的reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 37 / 37 hashes verified |
-| 内部documentation links | all local targets resolved |
-| Hardened container smoke test | network disabled・read-only rootでpassed |
-
-benchmark、test範囲、統計上の制約、release historyは[`docs/evaluation.md`](docs/evaluation.md)、[`docs/limitations.md`](docs/limitations.md)、[`CHANGELOG.md`](CHANGELOG.md)に記録しています。これらは公開engineering harnessとevidence controlを検証するものであり、非公開Hermes deploymentのproduction accuracyを主張するものではありません。
+公開コードが検証するのは成果物の引き渡しと品質確認です。非公開LLMの推論や実運用環境の予測精度を再現するものではありません。詳細は[`docs/evaluation.md`](docs/evaluation.md)と[`docs/limitations.md`](docs/limitations.md)に記載しています。
 
 ## 課題と設計目標
 

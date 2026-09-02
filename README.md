@@ -2,42 +2,15 @@
 
 **Language:** English | [日本語](japanese-readme.md)
 
-**A role-based AI office for research, governed data operations, analytics, review, and executive delivery—combining Hermes and Slack with Supabase/PostgreSQL and Obsidian/OhMyWiki inside a Dockerized operating model.**
+## Project summary
 
-This portfolio case study separates two things that are often mixed together:
+- **Problem:** Multi-step research and analytics requests become difficult to review when data work, interpretation, writing, and approval happen inside one model conversation.
+- **What I built:** Seven Hermes profiles with separate roles, Slack routing, Docker limits, artifact-based handoffs, and a dependency-free Python harness that exercises the public workflow on synthetic data.
+- **Result:** The reference run completes all seven stages, reproduces six committed outputs, and passes 12 tests. The reviewed deployment captures show Slack, Supabase, Obsidian, and role-specific workflows without publishing credentials or private messages.
+- **My role:** I designed the agent contracts, deployed the profiles, connected the workflow surfaces, implemented the public evaluation harness, and prepared the publication controls.
+- **Review or run:** Read the [sample executive report](artifacts/sample_run/executive_report.md) or run `agentic-office run --products data/sample_products.csv --sales data/sample_sales.csv --output artifacts/local_run`.
 
-1. **Operational evidence:** seven specialized Hermes profiles running in one bounded Docker deployment and serving work through Slack.
-2. **Reproducible evaluation:** a deterministic, dependency-free Python harness that exercises the same role boundaries on synthetic data, produces an auditable trace, and is tested in CI.
-
-No credentials, private messages, email/calendar data, workspace identifiers, or personal filesystem paths are published. Selected screenshots are either privacy-sanitized derivatives or low-sensitivity captures approved unchanged; private originals remain outside the repository.
-
-## Executive summary
-
-The prototype turns a general-purpose LLM runtime into a small virtual analytics office. A request is routed to agents with explicit responsibilities: data engineering, quantitative analysis, business interpretation, visualization, narrative, quality review, and final synthesis. Each stage emits a named artifact and a trace event instead of relying on an opaque group chat.
-
-The live deployment demonstrated:
-
-- seven isolated agent profiles with running gateways;
-- Docker resource limits of 2 CPUs and 4 GiB memory;
-- execution as the unprivileged `hermes` user;
-- Slack delivery of a public-source market scan;
-- role-specific work, including research, analysis, presentation generation, and operations support;
-- an Obsidian-backed research workflow that preserved source provenance, structured concepts and relations, produced multilingual fact-checks, and delivered a source-linked 15-slide report; and
-- a Supabase-backed data-operations loop spanning schema controls, role-separated ingestion, reconciliation, human-reviewed data quality, auditable SQL analysis, scheduled orchestration, and a deployed BI dashboard.
-
-The public repository adds the missing engineering layer: deterministic data validation, leakage-safe holdout forecasting, artifact contracts, a QA gate, privacy scanning, tests, and a hardened offline container.
-
-### Verification snapshot
-
-| Control | Committed status |
-|---|---:|
-| Unit and integration tests | 12 / 12 passed |
-| Deterministic reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 37 / 37 hashes verified |
-| Internal documentation links | all local targets resolved |
-| Hardened container smoke test | passed with network disabled and read-only root |
-
-The detailed benchmark, test scope, statistical limitations, and release history are recorded in [`docs/evaluation.md`](docs/evaluation.md), [`docs/limitations.md`](docs/limitations.md), and [`CHANGELOG.md`](CHANGELOG.md). These checks validate the public engineering harness and evidence controls; they are not production-accuracy claims for the private Hermes deployment.
+The public code validates handoffs and quality gates; it does not reproduce private LLM reasoning or claim production forecasting accuracy. Detailed scope and measurements are in [`docs/evaluation.md`](docs/evaluation.md) and [`docs/limitations.md`](docs/limitations.md).
 
 ## Problem and design objectives
 
@@ -49,7 +22,7 @@ This project restructures that work around five design objectives:
 2. **Artifact-based handoffs:** metrics, charts, notes, verdicts, and reports move between stages as named artifacts rather than unstructured conversation history.
 3. **Operational access:** Slack is the human-facing request and delivery surface; Hermes profiles provide specialist identities, policies, Skills, and tool access.
 4. **Fail-closed review:** the final report is created only after data, forecast, chart, decision-note, and narrative checks pass.
-5. **Reproducibility without disclosure:** the live deployment remains private, while a deterministic public harness reproduces the role sequence on synthetic data and emits reviewable outputs.
+5. **Reproducibility without disclosure:** the live deployment remains private, while a repeatable public harness reproduces the role sequence on synthetic data and emits reviewable outputs.
 
 ## Implementation model
 
@@ -61,13 +34,13 @@ The repository documents one system through two deliberately separate layers. Op
 | Entry point | Slack mentions routed through profile gateways | `agentic-office run` CLI |
 | Specialization | Seven Hermes profiles with profile-scoped identity, policy, Skills, and Slack configuration | Seven machine-readable contracts in [`config/agents.json`](config/agents.json) |
 | Data access | Approved profile tools, Supabase Skill/MCP access, and optional public-source integrations | Synthetic CSV inputs; no network or external credentials |
-| Coordination | Direct specialist routing for live work | Deterministic seven-stage artifact pipeline for evaluation |
+| Coordination | Direct specialist routing for live work | Fixed seven-stage artifact pipeline for evaluation |
 | Outputs | Slack research reports and work products | JSON metrics and trace, SVG chart, Slack payload preview, executive report |
-| Verification | Privacy-sanitized operational evidence with a digest register | Unit/integration tests, CI regeneration, privacy scan, and Docker build |
+| Verification | Reviewed deployment captures with a digest register | Unit/integration tests, CI regeneration, privacy scan, and Docker build |
 
 The detailed component model, configuration boundaries, and request paths are documented in [`docs/implementation.md`](docs/implementation.md).
 
-## Operational evidence
+## Reviewed deployment captures
 
 The following evidence is organized by implementation layer: Docker profiles, Slack access controls, `SOUL.md` role policies, Skills, MCP, and live Slack work. The images are either privacy-sanitized derivatives or low-sensitivity captures approved unchanged; they are not treated as forensic originals. Controlled source artifacts are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
 
@@ -137,7 +110,7 @@ The two work captures show different specialists used for different assignments:
   </tr>
 </table>
 
-This capture adds a substantive workload beyond profile availability: the lead agent converts a business problem into an artifact contract for Sam, Ada, Ethan, Mia, Noah, and Sophie. The public reference pipeline implements those same role boundaries deterministically; future live-stage captures can be appended without changing the distinction between observed execution and modeled orchestration.
+This capture adds a substantive workload beyond profile availability: the lead agent converts a business problem into an artifact contract for Sam, Ada, Ethan, Mia, Noah, and Sophie. The public reference pipeline implements those same role boundaries with fixed rules; future live-stage captures can be appended without changing the distinction between observed execution and modeled orchestration.
 
 ### Agent-produced design-system presentation
 
@@ -287,7 +260,7 @@ flowchart TB
     class O,BLOCKED output;
 ```
 
-The human control point sits between QA and final synthesis. Sophie submits the evidence and control verdict; the reviewer may approve the bounded result, return it to the role router for revision, or reject publication with a recorded rationale. Only an approved path reaches Oliver and Slack delivery. The included offline harness represents this checkpoint as a deterministic blocking gate so the contracts and evaluation logic remain reviewable without private Slack or LLM credentials.
+The human control point sits between QA and final synthesis. Sophie submits the evidence and control verdict; the reviewer may approve the bounded result, return it to the role router for revision, or reject publication with a recorded rationale. Only an approved path reaches Oliver and Slack delivery. The included offline harness represents this checkpoint as a blocking gate so the contracts and evaluation logic remain reviewable without private Slack or LLM credentials.
 
 ### Request paths
 
@@ -308,7 +281,7 @@ The live and public paths share the same role model but serve different verifica
 3. Ada computes descriptive metrics and fits an interpretable trend on the training window only.
 4. Ethan, Mia, and Noah independently produce decision notes, a portable chart, and a narrative from approved artifacts.
 5. Sophie evaluates required controls and submits the QA evidence to the review gate.
-6. In the live workflow, a human reviewer approves, requests revision, or rejects publication. The public harness preserves the checkpoint as a deterministic pass/fail gate for non-interactive CI.
+6. In the live workflow, a human reviewer approves, requests revision, or rejects publication. The public harness preserves the checkpoint as a pass/fail gate for non-interactive CI.
 7. Oliver emits the report and Slack payload preview only on the approved or passing path; the harness records every agent stage in `trace.json`.
 
 The live prototype does not claim autonomous agent-to-agent delegation. Direct profile routing is operationally evidenced; the sequential public pipeline is an inspectable evaluation model of the intended handoffs.
@@ -372,7 +345,7 @@ artifacts/local_run/
 └── trace.json
 ```
 
-`run_manifest.json` records the package version, a content-derived run ID, normalized SHA-256 digests for the two CSV inputs and the executed agent-contract registry, and digests for every generated artifact. It contains no local filesystem paths or timestamps, so the reference run remains deterministic and portable across operating systems.
+`run_manifest.json` records the package version, a content-derived run ID, normalized SHA-256 digests for the two CSV inputs and the executed agent-contract registry, and digests for every generated artifact. It contains no local filesystem paths or timestamps, so the reference run produces the same content across operating systems.
 
 Run the hardened offline demo:
 
@@ -402,7 +375,7 @@ The CI workflow verifies:
 - schema validation and drift detection for the seven executable agent contracts;
 - canonical dates, consecutive daily cadence, and chronological train/holdout separation;
 - explicit undefined MAPE handling when a holdout contains no non-zero actuals;
-- deterministic forecasting and report generation;
+- repeatable forecasting and report generation;
 - completion of all seven role stages;
 - QA-gate behavior;
 - exact regeneration of the six committed reference artifacts;
@@ -410,7 +383,7 @@ The CI workflow verifies:
 - successful execution of the digest-pinned container with no network, a read-only root filesystem, no Linux capabilities, and `no-new-privileges`;
 - absence of common secrets, personal paths, private-network addresses, and email addresses.
 
-Current deterministic benchmark results are recorded in [`docs/evaluation.md`](docs/evaluation.md). The committed output in [`artifacts/sample_run`](artifacts/sample_run) is regenerated and compared in CI.
+Current benchmark results are recorded in [`docs/evaluation.md`](docs/evaluation.md). The committed output in [`artifacts/sample_run`](artifacts/sample_run) is regenerated and compared in CI.
 
 ### Reference benchmark
 
@@ -426,14 +399,14 @@ Current deterministic benchmark results are recorded in [`docs/evaluation.md`](d
 | Seven-day projected demand | approximately 274 units |
 | Workflow and QA status | 7/7 stages, passed |
 
-These values are regression fixtures for the public harness, not production performance claims. The small synthetic dataset tests data contracts, temporal separation, artifact generation, and deterministic regeneration; it does not estimate general forecasting accuracy.
+These values are regression fixtures for the public harness, not production performance claims. The small synthetic dataset tests data contracts, temporal separation, artifact generation, and exact regeneration; it does not estimate general forecasting accuracy.
 
 ## Engineering decisions and trade-offs
 
-- **Deterministic public harness:** no model call or network request is needed to reproduce the analytical result. This improves reviewability but does not reproduce private LLM reasoning.
+- **Offline public harness:** no model call or network request is needed to reproduce the analytical result. This improves reviewability but does not reproduce private LLM reasoning.
 - **Sequential public orchestration:** the reference workflow makes every handoff inspectable and testable. The live system can route directly to a specialist instead of executing the full chain for every request.
 - **Chronological evaluation:** the final seven observations form the holdout and are excluded from fitting, preventing temporal leakage. Canonical ISO dates and consecutive daily cadence are enforced because the slope is interpreted as units per day. MAPE is reported only over non-zero actuals and becomes undefined when none exist. The linear trend is deliberately interpretable and does not model seasonality, promotions, or causal effects.
-- **Content-addressed provenance:** a deterministic manifest binds input and output digests to package version 1.1.0. This detects stale or altered reference artifacts without publishing machine-specific paths.
+- **Content-addressed provenance:** a hash manifest binds input and output digests to package version 1.1.0. This detects stale or altered reference artifacts without publishing machine-specific paths.
 - **Private operational state:** credentials, raw Slack history, `SOUL.md` bodies, sessions, and source screenshots stay outside Git. This limits external forensic verification, so public claims are scoped to sanitized evidence and recorded digests.
 - **Artifact contracts over free-form coordination:** downstream roles consume approved outputs rather than unrestricted conversation context. This increases traceability at the cost of a more rigid workflow.
 - **Upstream runtime boundary:** Hermes is consumed as a third-party runtime. The portfolio owns configuration, orchestration, evaluation, and evidence methodology—not the Hermes implementation itself.
@@ -446,7 +419,7 @@ One supplied screenshot exposed an authentication token in a URL. The committed 
 
 ## Contribution boundary
 
-This project does **not** claim authorship of Hermes Agent, Slack, or the external data-access services. It uses the open-source [Hermes Agent](https://github.com/NousResearch/hermes-agent) runtime. My work in this case study is the role design, profile deployment, Docker operation, Slack workflow, deterministic evaluation harness, evidence methodology, privacy controls, and portfolio documentation.
+This project does **not** claim authorship of Hermes Agent, Slack, or the external data-access services. It uses the open-source [Hermes Agent](https://github.com/NousResearch/hermes-agent) runtime. My work in this case study is the role design, profile deployment, Docker operation, Slack workflow, evaluation harness, evidence methodology, privacy controls, and portfolio documentation.
 
 No upstream Hermes source code is redistributed in this repository.
 
@@ -459,14 +432,14 @@ deployment/hermes/       Secret-free deployment notes and templates
 docs/                     Architecture, evaluation, limitations, and evidence
 assets/evidence/          Privacy-sanitized operational screenshots
 scripts/                  Runtime evidence collector and privacy scanner
-src/                      Deterministic analytics and orchestration harness
+src/                      Analytics and orchestration harness
 tests/                    Unit and integration tests
 artifacts/sample_run/     Reproducible reference output
 ```
 
 ## Limitations
 
-- The public harness is deterministic and does not call an LLM; it evaluates orchestration boundaries without exposing private model credentials.
+- The public harness follows fixed rules and does not call an LLM; it evaluates orchestration boundaries without exposing private model credentials.
 - The live market scan is a single public ranking snapshot and is not statistically representative of the full market.
 - Public screenshots are sanitized derivatives rather than forensic originals; private originals are available only for controlled interview review.
 - The role sequence is evaluated; comparative experiments against a single-agent baseline remain future work.
